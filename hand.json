@@ -1,0 +1,386 @@
+{
+	"CreatedDateTimeUTC": "2025-10-26T05:37:41.9496941Z",
+	"EventTitle": "",
+	"Hands": [
+		{
+			"AnteAmt": 0,
+			"BetStructure": "NOLIMIT",
+			"BombPotAmt": 0,
+			"Description": "Hand 001 - ふぇに男 9c 2c, ストーム久保 ac kc, SurugaMonkey qs 10d, 善悪菌 8d 4c, Zepher ks 3s",
+			"Duration": "PT3M7.9498709S",
+			"Events": [
+				{
+					"BetAmt": 0,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "FOLD",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 7,
+					"Pot": 0
+				},
+				{
+					"BetAmt": 0,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "FOLD",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 3,
+					"Pot": 0
+				},
+				{
+					"BetAmt": 25,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "BET",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 4,
+					"Pot": 6
+				},
+				{
+					"BetAmt": 25,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "CALL",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 5,
+					"Pot": 31
+				},
+				{
+					"BetAmt": 25,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "CALL",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 6,
+					"Pot": 54
+				},
+				{
+					"BetAmt": 0,
+					"BoardCards": "4h",
+					"BoardNum": 1,
+					"DateTimeUTC": null,
+					"EventType": "BOARD CARD",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 0,
+					"Pot": 0
+				},
+				{
+					"BetAmt": 0,
+					"BoardCards": "qd",
+					"BoardNum": 1,
+					"DateTimeUTC": null,
+					"EventType": "BOARD CARD",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 0,
+					"Pot": 0
+				},
+				{
+					"BetAmt": 0,
+					"BoardCards": "2d",
+					"BoardNum": 1,
+					"DateTimeUTC": null,
+					"EventType": "BOARD CARD",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 0,
+					"Pot": 0
+				},
+				{
+					"BetAmt": 5,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "BET",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 5,
+					"Pot": 75
+				},
+				{
+					"BetAmt": 30,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "BET",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 6,
+					"Pot": 80
+				},
+				{
+					"BetAmt": 30,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "CALL",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 4,
+					"Pot": 110
+				},
+				{
+					"BetAmt": 30,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "CALL",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 5,
+					"Pot": 140
+				},
+				{
+					"BetAmt": 0,
+					"BoardCards": "3d",
+					"BoardNum": 1,
+					"DateTimeUTC": null,
+					"EventType": "BOARD CARD",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 0,
+					"Pot": 0
+				},
+				{
+					"BetAmt": 0,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "CHECK",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 5,
+					"Pot": 165
+				},
+				{
+					"BetAmt": 0,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "CHECK",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 6,
+					"Pot": 165
+				},
+				{
+					"BetAmt": 10,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "BET",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 4,
+					"Pot": 165
+				},
+				{
+					"BetAmt": 10,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "CALL",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 5,
+					"Pot": 175
+				},
+				{
+					"BetAmt": 10,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "CALL",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 6,
+					"Pot": 185
+				},
+				{
+					"BetAmt": 0,
+					"BoardCards": "5d",
+					"BoardNum": 1,
+					"DateTimeUTC": null,
+					"EventType": "BOARD CARD",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 0,
+					"Pot": 0
+				},
+				{
+					"BetAmt": 0,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "CHECK",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 5,
+					"Pot": 195
+				},
+				{
+					"BetAmt": 0,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "CHECK",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 6,
+					"Pot": 195
+				},
+				{
+					"BetAmt": 50,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "BET",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 4,
+					"Pot": 195
+				},
+				{
+					"BetAmt": 50,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "CALL",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 5,
+					"Pot": 245
+				},
+				{
+					"BetAmt": 50,
+					"BoardCards": null,
+					"BoardNum": 0,
+					"DateTimeUTC": null,
+					"EventType": "CALL",
+					"NumCardsDrawn": 0,
+					"PlayerNum": 6,
+					"Pot": 295
+				}
+			],
+			"FlopDrawBlinds": {
+				"AnteType": "BB_ANTE_BB1ST",
+				"BigBlindAmt": 4,
+				"BigBlindPlayerNum": 6,
+				"BlindLevel": 0,
+				"ButtonPlayerNum": 4,
+				"SmallBlindAmt": 2,
+				"SmallBlindPlayerNum": 5,
+				"ThirdBlindAmt": 0,
+				"ThirdBlindPlayerNum": 0
+			},
+			"GameClass": "FLOP",
+			"GameVariant": "HOLDEM",
+			"HandNum": 1,
+			"NumBoards": 1,
+			"Players": [
+				{
+					"AggressionFrequencyPercent": 0,
+					"BlindBetStraddleAmt": 0,
+					"CumulativeWinningsAmt": 0,
+					"EliminationRank": -1,
+					"EndStackAmt": 400,
+					"HoleCards": [
+						"9c 2c"
+					],
+					"LongName": "",
+					"Name": "ふぇに男",
+					"PlayerNum": 3,
+					"PreFlopRaisePercent": 0,
+					"SittingOut": false,
+					"StartStackAmt": 400,
+					"VPIPPercent": 0,
+					"WentToShowDownPercent": 0
+				},
+				{
+					"AggressionFrequencyPercent": 75,
+					"BlindBetStraddleAmt": 0,
+					"CumulativeWinningsAmt": -115,
+					"EliminationRank": -1,
+					"EndStackAmt": 285,
+					"HoleCards": [
+						"ac kc"
+					],
+					"LongName": "",
+					"Name": "ストーム久保",
+					"PlayerNum": 4,
+					"PreFlopRaisePercent": 100,
+					"SittingOut": false,
+					"StartStackAmt": 400,
+					"VPIPPercent": 100,
+					"WentToShowDownPercent": 100
+				},
+				{
+					"AggressionFrequencyPercent": 42,
+					"BlindBetStraddleAmt": 0,
+					"CumulativeWinningsAmt": 230,
+					"EliminationRank": -1,
+					"EndStackAmt": 630,
+					"HoleCards": [
+						"qs 10d"
+					],
+					"LongName": "",
+					"Name": "SurugaMonkey",
+					"PlayerNum": 5,
+					"PreFlopRaisePercent": 0,
+					"SittingOut": false,
+					"StartStackAmt": 400,
+					"VPIPPercent": 100,
+					"WentToShowDownPercent": 100
+				},
+				{
+					"AggressionFrequencyPercent": 50,
+					"BlindBetStraddleAmt": 0,
+					"CumulativeWinningsAmt": -115,
+					"EliminationRank": -1,
+					"EndStackAmt": 285,
+					"HoleCards": [
+						"8d 4c"
+					],
+					"LongName": "",
+					"Name": "善悪菌",
+					"PlayerNum": 6,
+					"PreFlopRaisePercent": 0,
+					"SittingOut": false,
+					"StartStackAmt": 400,
+					"VPIPPercent": 100,
+					"WentToShowDownPercent": 100
+				},
+				{
+					"AggressionFrequencyPercent": 0,
+					"BlindBetStraddleAmt": 0,
+					"CumulativeWinningsAmt": 0,
+					"EliminationRank": -1,
+					"EndStackAmt": 400,
+					"HoleCards": [
+						"ks 3s"
+					],
+					"LongName": "",
+					"Name": "Zepher",
+					"PlayerNum": 7,
+					"PreFlopRaisePercent": 0,
+					"SittingOut": false,
+					"StartStackAmt": 400,
+					"VPIPPercent": 0,
+					"WentToShowDownPercent": 0
+				}
+			],
+			"RecordingOffsetStart": "PT7M19.5615407S",
+			"RunItNumTimes": 1,
+			"StartDateTimeUTC": "2025-10-26T06:14:46.6595090Z",
+			"StudLimits": {
+				"BringInAmt": 0,
+				"BringInPlayerNum": 1,
+				"HighLimitAmt": 0,
+				"LowLimitAmt": 0
+			}
+		}
+	],
+	"ID": 638970538619497000,
+	"Payouts": [
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0
+	],
+	"SoftwareVersion": "PokerGFX 3.2",
+	"Type": "CASH"
+}

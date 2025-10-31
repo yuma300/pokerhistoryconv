@@ -1,0 +1,44 @@
+PokerStars Hand #202510260001:  Hold'em No Limit NOLIMIT (2/4) - 2025-10-26 06:14:46 ET
+Table 'Home Game' 5-max  (Play Money) Seat #2 is the button
+Seat 1: yuma1 (400 in chips)
+Seat 2: yuma2 (400 in chips)
+Seat 3: SurugaMonkey (400 in chips)
+Seat 4: yuma3 (400 in chips)
+Seat 5: Zepher (400 in chips)
+SurugaMonkey: posts small blind 2
+yuma3: posts big blind 4
+*** HOLE CARDS ***
+Dealt to yuma1 [9c 2c]
+Zepher: folds
+yuma1: folds
+yuma2: raises 21 to 25
+SurugaMonkey: calls 23
+yuma3: calls 21
+*** FLOP *** [4h Qd 2d]
+SurugaMonkey: bets 5
+yuma3: raises 25 to 30
+yuma2: calls 30
+SurugaMonkey: calls 25
+*** TURN *** [4h Qd 2d] [3d]
+SurugaMonkey: checks
+yuma3: checks
+yuma2: bets 10
+SurugaMonkey: calls 10
+yuma3: calls 10
+*** RIVER *** [4h Qd 2d 3d] [5d]
+SurugaMonkey: checks
+yuma3: checks
+yuma2: bets 50
+SurugaMonkey: calls 50
+yuma3: calls 50
+*** SHOW DOWN ***
+SurugaMonkey: shows [Qs Td]
+SurugaMonkey collected 345 from pot
+*** SUMMARY ***
+Total pot 345 | Rake 0
+Board [4h Qd 2d 3d 5d]
+Seat 1: yuma1 folded before Flop (didn't bet)
+Seat 2: yuma2 showed [Ac Kc] and lost
+Seat 3: SurugaMonkey showed [Qs Td] and won (345)
+Seat 4: yuma3 showed [8d 4c] and lost
+Seat 5: Zepher folded before Flop (didn't bet)
