@@ -79,38 +79,64 @@ function convertPokerGFXtoPokerStars(json: PokerGFXData): string {
   const board: string[] = [];
   const streets: Record<string, string[]> = { FLOP: [], TURN: [], RIVER: [] };
   let currentStreet = "PREFLOP";
-  let bet = true; //プリフロはベットされた状態からとする
+  let lastbetamount = bb; //プリフロはベットされた状態からとする
   Events.forEach((e) => {
     switch (e.EventType) {
       case "BOARD CARD":
         board.push(e.BoardCards!);
         if (board.length === 3) {
           currentStreet = "FLOP" ;
-          bet = false;
+          lastbetamount = 0;
         } 
         else if (board.length === 4) {
           currentStreet = "TURN";
-          bet = false;
+          lastbetamount = 0;
         }
         else if (board.length === 5) {
           currentStreet = "RIVER";
-           bet = false;
+           lastbetamount = 0;
         }
         break;
       case "BET":
-      case "CALL":
-      case "FOLD":
-      case "CHECK":
-      case "RAISE":
         if (currentStreet !== "PREFLOP") {
           if (streets[currentStreet]) {
-            streets[currentStreet].push(formatAction(e, Players, bet));
+            streets[currentStreet].push(formatAction(e, Players, lastbetamount));
           }
         } else {
           streets["PREFLOP"] = streets["PREFLOP"] || [];
-          streets["PREFLOP"].push(formatAction(e, Players, bet));
+          streets["PREFLOP"].push(formatAction(e, Players, lastbetamount));
         }
-        bet = true;
+        lastbetamount = e.BetAmt;
+        break;
+      case "CALL":
+        if (currentStreet !== "PREFLOP") {
+          if (streets[currentStreet]) {
+            streets[currentStreet].push(formatAction(e, Players, lastbetamount));
+          }
+        } else {
+          streets["PREFLOP"] = streets["PREFLOP"] || [];
+          streets["PREFLOP"].push(formatAction(e, Players, lastbetamount));
+        }
+        break;
+      case "FOLD":
+        if (currentStreet !== "PREFLOP") {
+          if (streets[currentStreet]) {
+            streets[currentStreet].push(formatAction(e, Players, lastbetamount));
+          }
+        } else {
+          streets["PREFLOP"] = streets["PREFLOP"] || [];
+          streets["PREFLOP"].push(formatAction(e, Players, lastbetamount));
+        }
+        break;
+      case "CHECK":
+        if (currentStreet !== "PREFLOP") {
+          if (streets[currentStreet]) {
+            streets[currentStreet].push(formatAction(e, Players, lastbetamount));
+          }
+        } else {
+          streets["PREFLOP"] = streets["PREFLOP"] || [];
+          streets["PREFLOP"].push(formatAction(e, Players, lastbetamount));
+        }
         break;
     }
   });
@@ -143,7 +169,7 @@ function convertPokerGFXtoPokerStars(json: PokerGFXData): string {
 
   const winner = Players.find((p) => p.CumulativeWinningsAmt > 0);
   if (winner) {
-    output += `${winner.Name}: collected ${(winner.CumulativeWinningsAmt)} from pot\n`;
+    output += `${winner.Name} collected ${(winner.CumulativeWinningsAmt)} from pot\n`;
   }
 
   // --- SUMMARY ---
@@ -192,18 +218,18 @@ function cardNumConverter(hand: string): string {
   return converted.join(' ');
 }
 
-function formatAction(e: Event, players: Player[], bet: boolean): string {
+function formatAction(e: Event, players: Player[], bet: number): string {
   const name = getPlayerName(players, e.PlayerNum);
   console.log(bet)
   switch (e.EventType) {
     case "BET":
-      if (bet == true) {
-        return `${name}: raises to ${(e.BetAmt)}`;
-      } else {
+      if (bet == 0) {
         return `${name}: bets ${(e.BetAmt)}`;
+      } else {
+        return `${name}: raises ${(e.BetAmt - bet)} to ${(e.BetAmt)}`;
       }
     case "CALL":
-      return `${name}: calls ${(e.BetAmt)}`;
+      return `${name}: calls ${(e.BetAmt - bet)}`;
     case "FOLD":
       return `${name}: folds`;
     case "CHECK":
