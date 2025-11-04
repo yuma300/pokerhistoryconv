@@ -55,24 +55,27 @@ function convertPokerGFXtoPokerStars(hand: Hand): string {
     StartDateTimeUTC,
   } = hand;
 
-  const handId = 202510260001; // 任意で連番に変更可能
+  const handId = 202510260008; // 任意で連番に変更可能
   const sb = (blinds.SmallBlindAmt);
   const bb = (blinds.BigBlindAmt);
+
   const date = new Date(StartDateTimeUTC).toISOString().replace("T", " ").split(".")[0];
+  const seatnum = Players.filter(e => e.StartStackAmt != 0).length
   const seatnumOffset:number = 0; //シートのオフセット、starsでは必ずシートは1から始まる必要がある
   const heroname:string = "Komachi"; //シートのオフセット、starsでは必ずシートは1から始まる必要がある  
 
   let output = "";
-  output += `PokerStars Hand #${handId}:  Hold'em No Limit ${BetStructure} (${sb}/${bb}) - ${date} ET\n`;
-  output += `Table 'Home Game' 5-max  (Play Money) Seat #${blinds.ButtonPlayerNum - seatnumOffset} is the button\n`;
+  output += `PokerStars Hand #${handId}:  Hold'em No Limit ${BetStructure} (${sb}/${bb}/${bb}) - ${date} ET\n`;
+  output += `Table 'Home Game' ${seatnum}-max  (Play Money) Seat #${blinds.ButtonPlayerNum - seatnumOffset} is the button\n`;
 
   // --- 座席情報 ---
   Players.forEach((p) => {
-    output += `Seat ${p.PlayerNum - seatnumOffset}: ${p.Name} (${(p.StartStackAmt)} in chips)\n`;
+    if (p.StartStackAmt != 0) output += `Seat ${p.PlayerNum - seatnumOffset}: ${p.Name} (${(p.StartStackAmt)} in chips)\n`;
   });
 
   output += `${getPlayerName(Players, blinds.SmallBlindPlayerNum)}: posts small blind ${sb}\n`;
   output += `${getPlayerName(Players, blinds.BigBlindPlayerNum)}: posts big blind ${bb}\n`;
+  output += `${getPlayerName(Players, blinds.BigBlindPlayerNum)}: posts the ante ${bb}\n`;
 
   // --- HOLE CARDS ---
   output += "*** HOLE CARDS ***\n";
@@ -90,10 +93,13 @@ function convertPokerGFXtoPokerStars(hand: Hand): string {
   let lastbetamount = bb; //プリフロはベットされた状態からとする
   let playeractions: PlayerAction[] = []
   let lastevent: Event = Events[0];
-  let totalPotAmt = 0;
+  let totalPotAmt = sb + bb + bb;
   playeractions.push({playerName: getPlayerName(Players, blinds.SmallBlindPlayerNum), action: "BET", betAmount: sb}) //sbの最後のアクション入れる
   playeractions.push({playerName: getPlayerName(Players, blinds.BigBlindPlayerNum), action: "BET", betAmount: bb}) //bbの最後のアクション入れる
   Events.forEach((e) => {
+    const name = getPlayerName(Players, e.PlayerNum);
+    const player = playeractions.find((e) => e.playerName === name)
+
     switch (e.EventType) {
       case "BOARD CARD":
         board.push(e.BoardCards!);
@@ -123,6 +129,21 @@ function convertPokerGFXtoPokerStars(hand: Hand): string {
           streets["PREFLOP"].push(formatAction(e, Players, lastbetamount, playeractions));
         }
         lastbetamount = e.BetAmt;
+        totalPotAmt += (e.BetAmt - (player? player.betAmount : 0));
+        console.log(`name: ${name}, e.BetAmt: ${e.BetAmt}, player.betAmount: ${player? player.betAmount : 0}`)
+        break;
+      case "ALL IN":
+        if (currentStreet !== "PREFLOP") {
+          if (streets[currentStreet]) {
+            streets[currentStreet].push(formatAction(e, Players, lastbetamount, playeractions));
+          }
+        } else {
+          streets["PREFLOP"] = streets["PREFLOP"] || [];
+          streets["PREFLOP"].push(formatAction(e, Players, lastbetamount, playeractions));
+        }
+        lastbetamount = e.BetAmt;
+        totalPotAmt += (e.BetAmt - (player? player.betAmount : 0));
+        console.log(`name: ${name}, e.BetAmt: ${e.BetAmt}, player.betAmount: ${player? player.betAmount : 0}`)
         break;
       case "CALL":
         if (currentStreet !== "PREFLOP") {
@@ -133,6 +154,8 @@ function convertPokerGFXtoPokerStars(hand: Hand): string {
           streets["PREFLOP"] = streets["PREFLOP"] || [];
           streets["PREFLOP"].push(formatAction(e, Players, lastbetamount, playeractions));
         }
+        totalPotAmt += (e.BetAmt - (player? player.betAmount : 0));
+        console.log(`name: ${name}, e.BetAmt: ${e.BetAmt}, player.betAmount: ${player? player.betAmount : 0}`)
         break;
       case "FOLD":
         if (currentStreet !== "PREFLOP") {
@@ -155,13 +178,13 @@ function convertPokerGFXtoPokerStars(hand: Hand): string {
         }
         break;
     }
+    console.log(`totalpotamt ${totalPotAmt}`)
     if (e.EventType != "FOLD") lastevent = e;
   });
   console.log(`lastevent.Pot: ${lastevent.Pot} , lastevent.BetAmt: ${lastevent.BetAmt}`)
-  totalPotAmt = lastevent.Pot;
-  if (Events.slice(-1)[0].EventType == "CALL") {
-    totalPotAmt = lastevent.Pot + lastevent.BetAmt;
-  }
+//  if (Events.slice(-1)[0].EventType != "CALL") {
+//    totalPotAmt -= lastevent.BetAmt;
+//  }
 
   // --- ストリート毎に出力 ---
   if (streets["PREFLOP"]?.length) output += streets["PREFLOP"].join("\n") + "\n";
@@ -184,12 +207,12 @@ function convertPokerGFXtoPokerStars(hand: Hand): string {
   // --- SHOWDOWN ---
   output += "*** SHOW DOWN ***\n";
   Players.forEach((p) => {
-    if (p.HoleCards?.length) {
+    if (p.HoleCards?.length && p.StartStackAmt != 0) {
       output += `${p.Name}: shows [${cardNumConverter(p.HoleCards[0])}]\n`;
     }
   });
 
-  const winner = Players.find((p) => p.CumulativeWinningsAmt > 0);
+  const winner = Players.find((p) => p.EndStackAmt - p.StartStackAmt > 0);
   if (winner) {
     output += `${winner.Name} collected ${totalPotAmt} from pot\n`;
   }
@@ -200,17 +223,18 @@ function convertPokerGFXtoPokerStars(hand: Hand): string {
   output += `Board [${cardNumConverter(board.join(" "))}]\n`;
 
   Players.forEach((p) => {
-    const win = p.CumulativeWinningsAmt > 0;
-    const lose = p.CumulativeWinningsAmt < 0;
+    const win = p.EndStackAmt - p.StartStackAmt > 0;
+    const lose = p.EndStackAmt - p.StartStackAmt < 0;
+    if (p.StartStackAmt == 0) return;
     if (win)
       output += `Seat ${p.PlayerNum - seatnumOffset}: ${p.Name} showed [${cardNumConverter(p.HoleCards[0])}] and won (${(
-        p.CumulativeWinningsAmt
+        totalPotAmt
       )})\n`;
     else if (lose)
       output += `Seat ${p.PlayerNum - seatnumOffset}: ${p.Name} showed [${cardNumConverter(p.HoleCards[0])}] and lost\n`;
     else output += `Seat ${p.PlayerNum - seatnumOffset}: ${p.Name} folded before Flop (didn't bet)\n`;
   });
-
+  output += `\n\n`;
   return output;
 }
 
@@ -250,6 +274,13 @@ function formatAction(e: Event, players: Player[], bet: number, playeractions: A
       } else {
         return `${name}: raises ${(e.BetAmt - bet)} to ${(e.BetAmt)}`;
       }
+    case "ALL IN":
+      playeractions.push({playerName: name, action: e.EventType, betAmount: e.BetAmt})
+      if (bet == 0) {
+        return `${name}: bets ${(e.BetAmt)}`;
+      } else {
+        return `${name}: raises ${(e.BetAmt - bet)} to ${(e.BetAmt)}`;
+      }
     case "CALL":
       const player = playeractions.find((e) => e.playerName === name)
       playeractions.push({playerName: name, action: e.EventType, betAmount: e.BetAmt})
@@ -269,12 +300,12 @@ function getPlayerName(players: Player[], num: number): string {
 
 // --- 実行例 ---
 const data = JSON.parse(fs.readFileSync("hand.json", "utf-8")) as PokerGFXData;
-//data.Hands.forEach(json => {
-//  const result = convertPokerGFXtoPokerStars(json);  
-//  fs.appendFileSync("hand-history.txt", result);
-//});
+data.Hands.forEach(json => {
+  const result = convertPokerGFXtoPokerStars(json);  
+  fs.appendFileSync("hand-history.txt", result);
+});
 
-const result = convertPokerGFXtoPokerStars(data.Hands[0]);
-fs.appendFileSync("hand-history.txt", result);
+//const result = convertPokerGFXtoPokerStars(data.Hands[0]);
+//fs.appendFileSync("hand-history.txt", result);
 
 console.log("✅ PokerStars形式のハンド履歴を hand-history.txt に出力しました！");
