@@ -61,7 +61,7 @@ function convertPokerGFXtoPokerStars(hand: Hand, handId: number): string {
   const date = new Date(StartDateTimeUTC).toISOString().replace(/-/g, "/").replace("T", " ").split(".")[0];
   const seatnum = Players.filter(e => e.StartStackAmt != 0).length
   const seatnumOffset:number = 0; //シートのオフセット、starsでは必ずシートは1から始まる必要がある
-  const heroname:string = "aaaa 8"; //シートのオフセット、starsでは必ずシートは1から始まる必要がある  
+  const heroname:string = "Komachi"; //シートのオフセット、starsでは必ずシートは1から始まる必要がある  
 
   let output = "";
   output += `PokerStars Hand #${handId}:  Hold'em No Limit ${BetStructure} (${sb}/${bb}/${bb}) - ${date} ET\n`;
@@ -194,12 +194,12 @@ function convertPokerGFXtoPokerStars(hand: Hand, handId: number): string {
   }
 
   if (board.length >= 4) {
-    output += `*** TURN *** [${cardNumConverter(board.slice(0, 3).join(" "))}] [${board[3]}]\n`;
+    output += `*** TURN *** [${cardNumConverter(board.slice(0, 3).join(" "))}] [${cardNumConverter(board[3])}]\n`;
     output += streets["TURN"].join("\n") + "\n";
   }
 
   if (board.length >= 5) {
-    output += `*** RIVER *** [${cardNumConverter(board.slice(0, 3).join(" "))}] [${board[4]}]\n`;
+    output += `*** RIVER *** [${cardNumConverter(board.slice(0, 4).join(" "))}] [${cardNumConverter(board[4])}]\n`;
     output += streets["RIVER"].join("\n") + "\n";
   }
 
@@ -302,7 +302,7 @@ function getPlayerName(players: Player[], num: number): string {
 }
 
 // --- 実行例 ---
-let handId = 201956253908; // 任意で連番に変更可能
+let handId = 201956165348; // 任意で連番に変更可能
 
 
 const data = JSON.parse(fs.readFileSync("hand.json", "utf-8")) as PokerGFXData;
